@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#101329" />
+  <meta name="description" content="A student Ethereum bank DApp with MetaMask, deposit, withdraw and balance checking." />
+  <title>Nova Bank — Ethereum DApp</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <div class="ambient ambient-one"></div>
+  <div class="ambient ambient-two"></div>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#top" aria-label="Nova Bank home">
+        <span class="brand-mark"><span></span><span></span><span></span></span>
+        <span>NOVA<span class="brand-light">BANK</span></span>
+      </a>
+      <div class="topbar-actions">
+        <div class="network-pill"><span class="live-dot"></span><span id="network-label">Sepolia Testnet</span></div>
+        <button class="button button-connect" id="connect-button" type="button">
+          <span class="wallet-icon">◈</span><span id="connect-label">Connect Wallet</span>
+        </button>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="welcome-row">
+        <div>
+          <p class="eyebrow">DECENTRALIZED BANKING</p>
+          <h1>Your money.<br /><span>Your control.</span></h1>
+          <p class="subheading">A simple Ethereum bank powered by a smart contract.</p>
+        </div>
+        <aside class="student-card">
+          <div class="student-card-top"><span class="student-icon">✦</span><span>STUDENT PROFILE</span></div>
+          <p class="student-label">STUDENT ID</p>
+          <p class="student-value" id="student-id">66062728</p>
+          <div class="student-divider"></div>
+          <p class="student-label">FULL NAME</p>
+          <p class="student-value" id="student-name">Siksen Sarutisuta</p>
+        </aside>
+      </section>
+
+      <section class="wallet-overview panel">
+        <div class="overview-main">
+          <div class="section-kicker"><span class="kicker-icon">◉</span> MY BANK ACCOUNT</div>
+          <p class="balance-caption">Your deposited balance</p>
+          <div class="balance-line"><span class="main-balance" id="bank-balance">—</span><span class="currency">ETH</span></div>
+          <div class="account-line"><span class="account-dot"></span><span id="wallet-address">Wallet not connected</span><button class="copy-button" id="copy-address" type="button" title="Copy address" disabled>▣</button></div>
+        </div>
+        <div class="overview-side">
+          <div class="mini-stat">
+            <span class="mini-stat-label">WALLET BALANCE</span>
+            <strong id="wallet-balance">— <small>ETH</small></strong>
+            <span class="mini-stat-note">Available in MetaMask</span>
+          </div>
+          <div class="mini-stat mini-stat-contract">
+            <span class="mini-stat-label">TOTAL BANK DEPOSITS</span>
+            <strong id="total-bank-balance">— <small>ETH</small></strong>
+            <span class="mini-stat-note">Held by the smart contract</span>
+          </div>
+        </div>
+        <div class="card-orbit orbit-a"></div><div class="card-orbit orbit-b"></div>
+      </section>
+
+      <div class="status-banner" id="status-banner" role="status" aria-live="polite">
+        <span class="status-indicator"></span><span id="status-message">Connect MetaMask to get started. Use the Sepolia test network.</span>
+        <button id="switch-network-button" class="text-button" type="button" hidden>Switch network ↗</button>
+      </div>
+
+      <section class="actions-section">
+        <div class="section-heading">
+          <div><p class="eyebrow">ACCOUNT ACTIONS</p><h2>Move your ETH</h2></div>
+          <span class="secure-tag"><span>⌑</span> Secured by Smart Contract</span>
+        </div>
+        <div class="action-grid">
+          <article class="action-card panel deposit-card">
+            <div class="action-card-head"><div class="action-symbol deposit-symbol">↓</div><span class="action-tag">ADD FUNDS</span></div>
+            <h3>Deposit ETH</h3>
+            <p class="action-description">Send ETH from your connected wallet into your bank account.</p>
+            <form id="deposit-form" class="amount-form">
+              <label for="deposit-amount">AMOUNT</label>
+              <div class="amount-input-wrap"><input id="deposit-amount" name="amount" type="number" min="0.000000000000000001" step="any" inputmode="decimal" placeholder="0.00" required /><span>ETH</span></div>
+              <button class="button button-deposit" type="submit" disabled><span>Deposit ETH</span><span>↗</span></button>
+            </form>
+            <div class="action-footnote"><span class="footnote-dot"></span> Requires a MetaMask transaction approval</div>
+          </article>
+
+          <article class="action-card panel withdraw-card">
+            <div class="action-card-head"><div class="action-symbol withdraw-symbol">↑</div><span class="action-tag">TAKE OUT</span></div>
+            <h3>Withdraw ETH</h3>
+            <p class="action-description">Withdraw your deposited ETH back to the connected wallet.</p>
+            <form id="withdraw-form" class="amount-form">
+              <label for="withdraw-amount">AMOUNT</label>
+              <div class="amount-input-wrap"><input id="withdraw-amount" name="amount" type="number" min="0.000000000000000001" step="any" inputmode="decimal" placeholder="0.00" required /><span>ETH</span></div>
+              <button class="button button-withdraw" type="submit" disabled><span>Withdraw ETH</span><span>↗</span></button>
+            </form>
+            <div class="action-footnote"><span class="footnote-dot"></span> You can only withdraw your own balance</div>
+          </article>
+        </div>
+      </section>
+
+      <section class="history-section panel">
+        <div class="history-heading"><div><p class="eyebrow">ON-CHAIN ACTIVITY</p><h2>Recent transactions</h2></div><span class="history-network"><span class="live-dot"></span> Sepolia</span></div>
+        <div class="history-table-wrap">
+          <table>
+            <thead><tr><th>TYPE</th><th>AMOUNT</th><th>DATE</th><th>TRANSACTION</th><th>STATUS</th></tr></thead>
+            <tbody id="history-body"><tr class="empty-row"><td colspan="5"><span class="empty-icon">⌁</span><br />Your transactions will appear here after you deposit or withdraw ETH.</td></tr></tbody>
+          </table>
+        </div>
+        <p class="history-note">Recent activity is read from Deposit and Withdraw events emitted by the smart contract.</p>
+      </section>
+
+      <section class="contract-note">
+        <div class="contract-note-icon">⛓</div>
+        <div><strong>Powered by Ethereum</strong><p>This is a learning project on Sepolia Testnet. Test ETH has no real-world monetary value.</p></div>
+        <a href="https://sepolia.etherscan.io" target="_blank" rel="noopener noreferrer">Block explorer ↗</a>
+      </section>
+    </main>
+
+    <footer><span>© 2026 NOVA BANK DAPP</span><span>BUILT FOR LEARNING · ETHEREUM SEPOLIA</span></footer>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
