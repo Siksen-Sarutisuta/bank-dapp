@@ -5,7 +5,7 @@ export const APP_CONFIG = {
   studentName: "Siksen Sarutisuta",
 
   // Paste the deployed Bank contract address from Remix after deployment.
-  contractAddress: "PASTE_DEPLOYED_CONTRACT_ADDRESS_HERE",
+  contractAddress: "0xb430725d532E6a72e65C3b72A0Ae8aE721c4e4B1",
 
   // Ethereum Sepolia Testnet
   chainId: 11155111,
